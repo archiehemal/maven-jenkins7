@@ -31,22 +31,3 @@ pipeline {
         }
     }
 }
-
-
-
-
-pipeline {
-    agent any
-    stages {
-        stage('copy') {
-            steps {
-                copyArtifacts filter: '**/*.war', fingerprintArtifacts: true, projectName: 'build-pipeline', selector: lastSuccessful()
-            }
-        }
-        stage('deploy') {
-            steps {
-                deploy adapters: [tomcat9(alternativeDeploymentContext: '', credentialsId: 'tomcatcred', path: '', url: 'http://34.72.82.19:8090/')], contextPath: null, war: '**/*.war'
-            }
-        }
-        }
-    }
