@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    tools{
-        jdk 'java17'
-        maven 'maven3'
-    }
     stages {
         stage('git code download') {
             steps {
@@ -13,20 +9,10 @@ pipeline {
         }
         stage('build') {
             steps {
-                echo "build java project"
-                sh 'mvn clean package'
-            }
-        }
-        stage('Archive Artifacts') {
-            steps {
-                echo "archiving artifacts"
-                archiveArtifacts artifacts: '**/*.war', followSymlinks: false
-            }
-        }
-        stage('trigger deployment') {
-            steps {
-                echo "trigered"
-                build wait: false, job: 'deploy-pipeline'
+                sh '''docker build -t archiehemal/tomcat:${BUILD_NUMBER} .
+                      docker tag archiehemal/tomcat:${BUILD_NUMBER} archiehemal/tomcat:latest
+                      docker push archiehemal/tomcat:${BUILD_NUMBER}
+                      docker push archiehemal/tomcat:latest'''
             }
         }
     }
