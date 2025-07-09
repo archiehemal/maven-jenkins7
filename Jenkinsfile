@@ -9,10 +9,10 @@ pipeline {
         }
         stage('build') {
             steps {
-                sh '''docker build -t archiehemal/tomcat:${BUILD_NUMBER} .
-                      docker tag archiehemal/tomcat:${BUILD_NUMBER} archiehemal/tomcat:latest
-                      docker push archiehemal/tomcat:${BUILD_NUMBER}
-                      docker push archiehemal/tomcat:latest'''
+                sh '''docker build -t archie24/tomcat:${BUILD_NUMBER} .
+                      docker tag archie24/tomcat:${BUILD_NUMBER} archie24/tomcat:latest
+                      docker push archieh24/tomcat:${BUILD_NUMBER}
+                      docker push archie24/tomcat:latest'''
             }
         }
     }
