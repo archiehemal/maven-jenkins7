@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh '''docker build -t archie24/tomcat:${BUILD_NUMBER} .
                       docker tag archie24/tomcat:${BUILD_NUMBER} archie24/tomcat:latest
-                      docker push archieh24/tomcat:${BUILD_NUMBER}
+                      docker push archie24/tomcat:${BUILD_NUMBER}
                       docker push archie24/tomcat:latest'''
             }
         }
